@@ -20,6 +20,8 @@ services:
     volumes:
       - ./logs1:/scripts/logs
     environment:
+      #脚本更新仓库地址，配置了会切换到对应的地址
+      - REPO_URL=https://gitee.com/lxk0301/jd_scripts.git
       - JD_COOKIE=pt_key=AAJgCp-MADAy6FOJkfXLI8J9mXtql4S1Nvh2lA8SY8BeY7QqW2EtNizMtwXhd67X_-14k5yfPxo; pt_pin=114991631-923070;
       #微信server酱通
       - PUSH_KEY=SCU148808Ta30ffb25381fcbfa404bbf132b3c4f6b5ffbc757b1c41
@@ -41,6 +43,8 @@ services:
     volumes:
       - ./logs2:/scripts/logs
     environment:
+      #脚本更新仓库地址，配置了会切换到对应的地址
+      - REPO_URL=https://gitee.com/lxk0301/jd_scripts.git
       - JD_COOKIE=pt_key=AAJgDBHDADDf5JeskPQ0tFl8iMxVfHbLmGvAvsH8gF9AMfgU0b6Fcig7avCrraqtYEvsRqEcHmk;pt_pin=Eyebrowbend;
       #微信server酱通
       - PUSH_KEY=SCU148808Ta30ffb25381fcbfa404bbf132b3c4f6b5ffbc757b1c41
@@ -58,6 +62,8 @@ services:
     volumes:
       - ./logs3:/scripts/logs
     environment:
+      #脚本更新仓库地址，配置了会切换到对应的地址
+      - REPO_URL=https://gitee.com/lxk0301/jd_scripts.git
       - JD_COOKIE=pt_key=AAJgESM5ADDnOjcpfrWc-LWP8RiIYc_mvxwZprzDKF7uuY_ZEijtdUCMgjUdO3zOH1NxqJHT6j0; pt_pin=jd_6848b89b62f49;
       #微信server酱通
       - PUSH_KEY=SCU148808Ta30ffb25381fcbfa404bbf132b3c4f6b5ffbc757b1c41    
