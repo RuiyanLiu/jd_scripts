@@ -13,17 +13,17 @@ boxjs IMMORTAL_LATLON
 ============Quantumultx===============
 [task_local]
 #京东神仙书院
-20 8 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_immortal.js, tag=京东神仙书院, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+20 8,12,22 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_immortal.js, tag=京东神仙书院, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "20 8 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_immortal.js, tag=京东神仙书院
+cron "20 8,12,22 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_immortal.js, tag=京东神仙书院
 
 ===============Surge=================
-京东神仙书院 = type=cron,cronexp="20 8 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_immortal.js
+京东神仙书院 = type=cron,cronexp="20 8,12,22 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_immortal.js
 
 ============小火箭=========
-京东神仙书院 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_immortal.js, cronexpr="20 8 * * *", timeout=3600, enable=true
+京东神仙书院 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_immortal.js, cronexpr="20 8,12,22 * * *", timeout=3600, enable=true
  */
 const $ = new Env('京东神仙书院');
 
@@ -52,9 +52,8 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 const inviteCodes = [
-  `34xIs4YwE5Z7Hdgv1s8QjTq3HepGHuoOqTrCQXo1HlAYMyGxRosM@43xIs4YwE5Z7DsWOzDSP8l8drhjVzpIYtnCtMcGlCruDOAcZB9wExXh2wXcMaKiRCiLQ`,
-  `43xIs4YwE5Z7HhZthiU0OiG1q3zq7jEVNhYPJboehyCBYgKsUWz01SiT04V6g5FLY1Jg@43xIs4YwE5Z7DsWOzDSP8l8drhjVzpIYtnCtMcGlCruDOAcZB9wExXh2wXcMaKiRCiLQ`,
-  `43xIs4YwE5Z7HhZthiU0OiG1q3zq7jEVNhYPJboehyCBYgKsUWz01SiT04V6g5FLY1Jg@34xIs4YwE5Z7Hdgv1s8QjTq3HepGHuoOqTrCQXo1HlAYMyGxRosM`
+  `39xIs4YwE5Z7CPQQ0baz9jNWO6PSZHsNWqfOwWyqScbJBGhg4v7HbuBg63TJ4@27xIs4YwE5Z7FGzJqrMmavC_vWKtbEaJxbz0Vahw@43xIs4YwE5Z7DsWOzDSP_N6WTDnbA0wBjjof6cA9FzcbHMcZB9wE1R3ToSluCgxAzEXQ@43xIs4YwE5Z7DsWOzDSEuRWEOROpnDjMx_VvSs5ikYQ8XgcZB9whEHjDmPKQoL16TZ8w@50xIs4YwE5Z7FTId9W-KibDgxxx6AEa7189V1zSxSf2HP6681IXPQ81aJEP77WoHXLcK7QzlxGqsGqfU@43xIs4YwE5Z7DsWOzDSPKFWdkRe2Ae6h0jAdlhuSmuwcfUcZB9wBcHhj0_zyZDNK4Rhg`,
+  `39xIs4YwE5Z7CPQQ0baz9jNWO6PSZHsNWqfOwWyqScbJBGhg4v7HbuBg63TJ4@27xIs4YwE5Z7FGzJqrMmavC_vWKtbEaJxbz0Vahw@43xIs4YwE5Z7DsWOzDSP_N6WTDnbA0wBjjof6cA9FzcbHMcZB9wE1R3ToSluCgxAzEXQ@43xIs4YwE5Z7DsWOzDSEuRWEOROpnDjMx_VvSs5ikYQ8XgcZB9whEHjDmPKQoL16TZ8w@43xIs4YwE5Z7DsWOzDSFehRRs_UaNcqkiU7BrrzDTKHScMcZB9wkYC2z6K-QOsQy1S3A@43xIs4YwE5Z7DsWOzDSFcl8RjNxfrQquzeGQQtkQOUbyqscZB9wkxX2jw2HhM7TczeqA`
 ];
 !(async () => {
   await requireConfig();
@@ -237,7 +236,7 @@ function getExchangeInfo() {
           if (data && data['retCode'] === "200") {
             const {userRemainScore, exchageRate} = data.result
             console.log(`当前用户兑换比率${exchageRate}`)
-            if (exchageRate === 1.4 && userRemainScore >= scoreToBeans) {
+            if (userRemainScore >= scoreToBeans) {
               console.log(`已达到最大比率，去兑换`)
               await exchange()
             }
@@ -268,6 +267,11 @@ function exchange() {
           if (data && data['retCode'] === "200") {
             const {consumedUserScore, receivedJbeanNum} = data.result
             console.log(`兑换成功，消耗${consumedUserScore}积分，获得${receivedJbeanNum}京豆`)
+            $.msg($.name, ``, `京东账号${$.index} ${$.nickName}\n兑换成功，消耗${consumedUserScore}积分，获得${receivedJbeanNum}京豆`);
+            if ($.isNode()) await notify.sendNotify(`${$.name} - ${$.index} - ${$.nickName}`, `兑换成功，消耗${consumedUserScore}积分，获得${receivedJbeanNum}京豆`);
+          } else if (data['retCode'] === "323") {
+            console.log(`还木有到兑换时间哦~ `)
+            message += `还木有到兑换时间哦~ \n`
           } else {
             $.risk = true
             console.log(`账号被风控，无法参与活动`)

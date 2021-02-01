@@ -46,14 +46,12 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 const inviteCodes = [
-  `cgxZWijXdviFrVycVlHlo8lP880ixUJ7uu8BLHWqUTg@cgxZdTXtIrLe4lzBAVev7Tqtx2_RG0CBccRCS89zmqz5uuTMHZTFHQYB_bE`,
-  `cgxZLmCGLbPb7A3IFQyr7M490vNlSf3JUn6hP4BGtEal-S_KtD0XgE9x4oA@cgxZdTXtIrLe4lzBAVev7Tqtx2_RG0CBccRCS89zmqz5uuTMHZTFHQYB_bE`,
-  `cgxZWijXdviFrVycVlHlo8lP880ixUJ7uu8BLHWqUTg@cgxZLmCGLbPb7A3IFQyr7M490vNlSf3JUn6hP4BGtEal-S_KtD0XgE9x4oA`
+  `cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZ9_MZ8gByP7FZ368dN8oTZBwGieaH5HvtnvXuK1Epn_KK8yol8OYGw7h3M2j_PxSZvYA`,
+  `cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZdTXtIumO4w2cDgSqvYcqHwjaAzLxu0S371Dh_fctFJtN0tXYzdR7JaY`
 ];
 const pkInviteCodes = [
-  'IgNWdiLGaPaAvmHPAAGhvc3gzv_DJocVZMRO_Jl8YMFURVE3xTQ1k6bHLx5M6xhG',
-  'IgNWdiLGaPbb6wrAAQSv7KrR3OLeetAAVo5jphpCBsO897iYBEzJiOi2S86LFBKZ@IgNWdiLGaPaAvmHPAAGhvc3gzv_DJocVZMRO_Jl8YMFURVE3xTQ1k6bHLx5M6xhG',
-  'IgNWdiLGaPbb6wrAAQSv7KrR3OLeetAAVo5jphpCBsO897iYBEzJiOi2S86LFBKZ'
+  'IgNWdiLGaPadvlqJQnnKp27-YpAvKvSYNTSkTGvZylf_0wcvqD9EMkohENg@IgNWdiLGaPaZskfACQyhgLSpZWps-WtQEW3McibS@IgNWdiLGaPaAvmHPAQf769XqjJjMyRirPzN9-AS-WHY9Y_G7t9Cwe5gdiI2qEvDe@IgNWdiLGaPYCeJUfsq18UNi5ln9xEZSPRdOue8Wl3hJTS2SQzU0vulL0fHeULJaIfgqHFd7f_aw@IgNWdiLGaPYCeJUfsq18UNi5ln9xEZSPRdOue8Wl3hLRjZBAJLHzBpcl18AeskNYctp_9Q',
+  'IgNWdiLGaPadvlqJQnnKp27-YpAvKvSYNTSkTGvZylf_0wcvqD9EMkohENg@IgNWdiLGaPaZskfACQyhgLSpZWps-WtQEW3McibS@IgNWdiLGaPaAvmHPAQf769XqjJjMyRirPzN9-AS-WHY9Y_G7t9Cwe5gdiI2qEvDe@IgNWdiLGaPYCeJUfsq18UNi5ln9xEZSPRdOue8Wl3hJTS2SQzU0vulL0fHeULJaIfgqHFd7f_aw@IgNWdiLGaPYCeJUfsq18UNi5ln9xEZSPRdOue8Wl3hLRjZBAJLHzBpcl18AeskNYctp_9Q'
 ]
 !(async () => {
   await requireConfig();
@@ -726,6 +724,20 @@ function shopLotteryInfo(shopSign) {
                         console.log(`${vo.taskName}已做完`)
                       }
                     }
+                  }else if (vo.taskType === 21) {
+                    if (vo.brandMemberVos) {
+                      if (vo.status === 1) {
+                        console.log(`准备做此任务：${vo.taskName}`)
+                        for (let task of vo.brandMemberVos) {
+                          if (task.status === 1) {
+                            await $.wait(2000)
+                            await collectScore(vo.taskId, task.advertId, null, null, shopSign);
+                          }
+                        }
+                      } else if (vo.status === 2) {
+                        console.log(`${vo.taskName}已做完`)
+                      }
+                    }
                   }
                 }
               }
@@ -763,6 +775,8 @@ function doShopLottery(shopSign) {
                 console.log(`抽奖成功，获得${result.score}爆竹🧨`)
               else if (result.awardType === 2 || result.awardType === 3)
                 console.log(`抽奖成功，获得优惠卷`)
+              else if (result.awardType === 5)
+                console.log(`抽奖成功，品牌卡`)
               else
                 console.log(`抽奖成功，获得${JSON.stringify(result)}`)
             } else {
@@ -791,8 +805,9 @@ function pkInfo() {
           if (safeGet(data)) {
             data = JSON.parse(data);
             if (data.code === 0 && data.data && data.data.bizCode === 0) {
-              console.log(`\n您的好友PK助力码为${data.data.result.groupInfo.groupAssistInviteId}\n`)
+              console.log(`\n您的好友PK助力码为${data.data.result.groupInfo.groupAssistInviteId}\n注：此pk邀请码每天都变！`)
               let info = data.data.result.groupPkInfo
+              console.log(`预计分得:${data.data.result.groupInfo.personalAward}红包`)
               if (info.dayAward)
                 console.log(`白天关卡：${info.dayAward}元红包，完成进度 ${info.dayTotalValue}/${info.dayTargetSell}`)
               else {
