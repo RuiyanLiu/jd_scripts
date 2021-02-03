@@ -26,7 +26,7 @@ services:
       #微信server酱通
       #- PUSH_KEY=SCU148808Ta30ffb25381fcbfa404bbf132b3c4f6b5ffbc757b1c41
       #微信push+
-      - PUSH_PLUS_TOKEN = ac85fce9759f42d6a97b25511d416c4c
+      - PUSH_PLUS_TOKEN=ac85fce9759f42d6a97b25511d416c4c
 
       # 互助助码等参数可自行增加，如下。
       # 京东种豆得豆
