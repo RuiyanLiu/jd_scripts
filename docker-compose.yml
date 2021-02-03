@@ -32,7 +32,7 @@ services:
       # 京东种豆得豆
       # - PLANT_BEAN_SHARECODES=
       
-  jd_scripts2: #默认
+  jd_scripts2: #默认 WM
     image: lxk0301/jd_scripts
     restart: always
     container_name: jd_scripts2
@@ -51,7 +51,7 @@ services:
       #微信server酱通
       - PUSH_KEY=SCU148808Ta30ffb25381fcbfa404bbf132b3c4f6b5ffbc757b1c41
   
-  jd_scripts3: #默认
+  jd_scripts3: #默认 QML
     image: lxk0301/jd_scripts
     restart: always
     container_name: jd_scripts3
@@ -67,5 +67,24 @@ services:
       #脚本更新仓库地址，配置了会切换到对应的地址
       - REPO_URL=https://gitee.com/lxk0301/jd_scripts.git
       - JD_COOKIE=pt_key=AAJgESM5ADDnOjcpfrWc-LWP8RiIYc_mvxwZprzDKF7uuY_ZEijtdUCMgjUdO3zOH1NxqJHT6j0; pt_pin=jd_6848b89b62f49;
+      #微信server酱通
+      - PUSH_KEY=SCU148808Ta30ffb25381fcbfa404bbf132b3c4f6b5ffbc757b1c41  
+  
+  jd_scripts4: #默认 LLH
+    image: lxk0301/jd_scripts
+    restart: always
+    container_name: jd_scripts4
+    tty: true
+    # 因为更换仓库地址可能git pull的dns解析不到，可以在配置追加hosts
+    extra_hosts:
+      - "gitee.com:180.97.125.228"
+      - "github.com:13.229.188.59"
+      - "raw.githubusercontent.com:151.101.228.133"
+    volumes:
+      - ./logs4:/scripts/logs
+    environment:
+      #脚本更新仓库地址，配置了会切换到对应的地址
+      - REPO_URL=https://gitee.com/lxk0301/jd_scripts.git
+      - JD_COOKIE=pt_key=AAJgGhQtADAf0dBt-17g75mesFkLLGgJnDqEtXp7hHVCJePsSKGsHYbrDIpSx0WlUHKfyumxWEA; pt_pin=jd_64bade3ae9def;
       #微信server酱通
       - PUSH_KEY=SCU148808Ta30ffb25381fcbfa404bbf132b3c4f6b5ffbc757b1c41  
