@@ -49,8 +49,11 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 const inviteCodes = [
-  `oMZeX-5M9YkGAOtiP7Rz_yglorV31MmxRvuK5Itar4d2t7V2@oMZeXbBAqIJUAbA3ZrZ2rsve9AyA3Kq-6R23UrqYSIOwFRDm@vcZZM4U-2s49fLxMRfA8s9Ob_ZkZ7O0QtnrKtPOtbZhSjA@oMZeXOZOoY9eUOFiZrFxrKwAOXx25LYPCj8I_sDK6tbv4jls@oMZeXe9Kod0DCrE5M7Z1qcr4t7hsbJF9IrJMdgiso95xHVqC`,
-  `oMZeX-5M9YkGAOtiP7Rz_yglorV31MmxRvuK5Itar4d2t7V2@oMZeXbBAqIJUAbA3ZrZ2rsve9AyA3Kq-6R23UrqYSIOwFRDm@vcZZM4U-2s49fLxMRfA8s9Ob_ZkZ7O0QtnrKtPOtbZhSjA@oMZeXOZOoY9eUOFiZrFxrKwAOXx25LYPCj8I_sDK6tbv4jls@oMZeXe9Kod0DCrE5M7Z1qcr4t7hsbJF9IrJMdgiso95xHVqC`,
+  `oMZeXe5MqNlfCrA3NeZ09q0QRbsriW0OFdL-KaAwtwsnfqEo@j9tkCaQX59kCXbZ9e_xws-1xMZAeUg6ZSQ9TTL7MyA`,
+  `oMZeXe5MqNlfCrA3NeZ09q0QRbsriW0OFdL-KaAwtwsnfqEo@-5M1Uu9JpohWHuszNLB3_1TXu4E0oRSIUMwHlSEPpszETcYf`,
+  `-5M1Uu9JpohWHuszNLB3_1TXu4E0oRSIUMwHlSEPpszETcYf@j9tkCaQX59kCXbZ9e_xws-1xMZAeUg6ZSQ9TTL7MyA`,
+  `oMZeXe5MqNlfCrA3NeZ09q0QRbsriW0OFdL-KaAwtwsnfqEo@-5M1Uu9JpohWHuszNLB3_1TXu4E0oRSIUMwHlSEPpszETcYf@j9tkCaQX59kCXbZ9e_xws-1xMZAeUg6ZSQ9TTL7MyA`,
+  `oMZeXe5MqNlfCrA3NeZ09q0QRbsriW0OFdL-KaAwtwsnfqEo@-5M1Uu9JpohWHuszNLB3_1TXu4E0oRSIUMwHlSEPpszETcYf@j9tkCaQX59kCXbZ9e_xws-1xMZAeUg6ZSQ9TTL7MyA`
 ];
 !(async () => {
   await requireConfig();
@@ -322,7 +325,7 @@ function helpFriend(inviteId) {
           if (data && data.data['bizCode'] === 0) {
             console.log(data.data.result.msg)
           } else {
-            console.log(data.data.bizMsg)
+            console.log(`helpFriends ${data.data.bizMsg}`)
             if (data.data.bizCode === -523) {
               $.canHelp = false
             }

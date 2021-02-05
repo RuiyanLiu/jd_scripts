@@ -8,8 +8,7 @@
 // 如: 京东账号1的shareCode1@京东账号1的shareCode2&京东账号2的shareCode1@京东账号2的shareCode2
 let shareCodes = [
   'V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=@Bo-jnVs_m9uBvbRzraXcSA==@-OvElMzqeyeGBWazWYjI1Q==',//账号一的好友shareCode,不同好友中间用@符号隔开
-  'eF5tQqxGaF2qUxyEkwPh0g==',//账号二的好友shareCode，不同好友中间用@符号隔开
-  'eF5tQqxGaF2qUxyEkwPh0g=='
+  '-OvElMzqeyeGBWazWYjI1Q==',//账号二的好友shareCode，不同好友中间用@符号隔开
 ]
 // 判断github action里面是否有京喜工厂互助码
 if (process.env.DREAM_FACTORY_SHARE_CODES) {
@@ -23,7 +22,7 @@ if (process.env.DREAM_FACTORY_SHARE_CODES) {
     shareCodes = process.env.DREAM_FACTORY_SHARE_CODES.split();
   }
 } else if (process.env.DREAM_FACTORY_SHARE_CODES) {
-  console.log(`由于您secret里面未提供助力码，故此处运行将会给脚本内置的码进行助力，请知晓！`)
+  console.log(`由于您环境变量(DREAM_FACTORY_SHARE_CODES)里面未提供助力码，故此处运行将会给脚本内置的码进行助力，请知晓！`)
 }
 for (let i = 0; i < shareCodes.length; i++) {
   const index = (i + 1 === 1) ? '' : (i + 1);
