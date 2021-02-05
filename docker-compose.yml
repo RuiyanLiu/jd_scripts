@@ -89,7 +89,7 @@ services:
       #微信server酱通
       - PUSH_KEY=SCU148808Ta30ffb25381fcbfa404bbf132b3c4f6b5ffbc757b1c41  
 
-  jd_scripts4: #默认 ZSQ
+  jd_scripts5: #默认 ZSQ
     image: lxk0301/jd_scripts
     restart: always
     container_name: jd_scripts5
