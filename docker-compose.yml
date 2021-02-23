@@ -22,6 +22,7 @@ services:
     environment:
       #脚本更新仓库地址，配置了会切换到对应的地址
       - REPO_URL=https://gitee.com/lxk0301/jd_scripts.git
+      # -- 更新于 2021-2-20 15:00
       - JD_COOKIE=pt_key=AAJgMLN_ADDe999rikjAE0rKZkPB23GbObwxYHWXvYbnypWCEnOTfqUsqlYUGCu1jOom90VcSHs; pt_pin=114991631-923070;
       #微信server酱通
       #- PUSH_KEY=SCU148808Ta30ffb25381fcbfa404bbf132b3c4f6b5ffbc757b1c41
@@ -47,7 +48,7 @@ services:
     environment:
       #脚本更新仓库地址，配置了会切换到对应的地址
       - REPO_URL=https://gitee.com/lxk0301/jd_scripts.git
-      - JD_COOKIE=pt_key=AAJgDBHDADDf5JeskPQ0tFl8iMxVfHbLmGvAvsH8gF9AMfgU0b6Fcig7avCrraqtYEvsRqEcHmk;pt_pin=Eyebrowbend;
+      - JD_COOKIE=pt_key=AAJgNFvfADA-MDpcVQ46aDB851MrNn1p5kneFjX1EhwKDPh7X0vTaInL9m8-JnvSjUMyXG0hgGM; pt_pin=Eyebrowbend;
       #微信server酱通
       - PUSH_KEY=SCU148808Ta30ffb25381fcbfa404bbf132b3c4f6b5ffbc757b1c41
   
